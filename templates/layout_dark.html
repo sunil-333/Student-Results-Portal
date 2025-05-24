@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    SVCE- {% block title %} {% endblock title %}
+  </title>
+  <link rel="stylesheet" href="/static/css/bulma.min.css" />
+  <link rel="icon" href="/static/images/favicon.png">
+  <style>
+    .center {
+      margin: 0 auto;
+    }
+
+    .color {
+      background-color: #1E2944;
+    }
+
+    html,
+    body {
+      margin: 0;
+      height: 120%;
+    }
+
+    body {
+      /*background-image: url('{{ bgImage }}');*/
+      background-image:linear-gradient( to bottom right, #5429a8, #e8e8e8);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 35px;
+    }
+
+
+    .navbar {
+      background-color: rgba(30, 41, 68, 0.5);
+    }
+
+    footer {
+      background-color: rgba(30, 41, 68, 0.5);
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    strong {
+      color: white;
+      font-size: 1.2em;
+    }
+
+    .button {
+      border: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="navbar-brand">
+      <a href="{{ url_for('home') }} ">
+        <img src="/static/images/svcelogolight.png" alt="logo" height="256" width="256"></a>
+    </div>
+    {% block navbarButton %} {% endblock navbarButton %}
+  </div>
+
+  {% block content %} {% endblock content %}
+
+  <footer class="py-5 is-fixed-bottom">
+    <div class="has-text-centered">
+      <p class="has-text-light">
+        Results portal developed by <strong>V Lokesh</strong> and <strong>S Akhilesh</strong>
+      </p>
+      <p class="has-text-light">With the help of <strong>K Bhanu Prakash</strong>, Assistant Professor, Department of
+        CSE</p>
+      <p class="has-text-light">
+        Powered by <strong>SVCE Exam Cell</strong>
+      </p>
+    </div>
+  </footer>
+
+  </div>
+</body>

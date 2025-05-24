@@ -1,0 +1,46 @@
+{% extends 'layoutdark1.html' %}
+
+{% block title %}
+Admin Login
+{% endblock title %}
+
+{% block content %}
+<div class="container pt-6">
+  <div class="column is-4-desktop is-6-tablet is-10-mobile center">
+    <div class="card px-6 py-6 ">
+      <div class="card-content">
+        <!-- TODO: change this url -->
+        <!-- <form action="/results/admin" class="form" method="post"> -->
+        <form action="/admin" class="form" method="post">
+          <div class="field">
+            <label for="username" class="label">Username: </label>
+            <div class="control">
+              {% if incorrect == False %}
+              <input type="text" id="username" name="username" class="input is-dark is-rounded" required>
+              {% else %}
+              <input type="text" id="username" name="username" class="input is-dark is-rounded is-danger" required>
+              {% endif %}
+            </div>
+            <label for="password" class="label">Password: </label>
+            <div class="control">
+              {% if incorrect == False %}
+              <input type="password" id="password" name="password" class="input is-dark is-rounded" required>
+              {% else %}
+              <input type="password" id="password" name="password" class="input is-dark is-rounded is-danger" required>
+              {% endif %}
+            </div>
+            {% if incorrect == True %}
+            <article class="message mt-3 is-danger">
+              <div class="message-body has-text-centered">Invalid Username or Password</div>
+            </article>
+            {% endif %}
+          </div>
+      </div>
+      <div class="pt-5 has-text-right">
+        <input type="submit" class="button has-text-light is-info is-rounded">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

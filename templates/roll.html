@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Results
+{% endblock title %}
+
+{% block content %}
+<div class="has-text-centered is-size-4 is-size-6-mobile" style="font-weight:bolder; color: #000080;">
+  <!-- <div class=" has-text-centered is-3" style="font-size:1.5em; font-weight: 900; font-family: CenturyGothic;"> -->
+  SRI VENKATESWARA COLLEGE OF ENGINEERING
+  <br>
+  (AUTONOMOUS)
+</div>
+<div class="has-text-centered is-size-6 is-size-7-mobile mb-2">
+  <!-- <div class="has-text-centered " style="font-size:1.1em; font-weight: 900; font-family: CenturyGothic;"> -->
+  <!--Approved by AICTE, Accredited by NAAC with 'A' Grade-->
+  <!--<br>-->
+  <!--Accredited by NBA (CSE, ECE, EEE, ME, CE & IT) & Permanently Affiliated to JNTUA.-->
+  <!--<br>-->
+  Karakambadi Road, Tirupati-517507, Andhra Pradesh, INDIA.
+  <!-- <hr> -->
+</div>
+<div class="content is-size-7-mobile">
+  <p class="has-text-centered is-underlined is-size-4 is-size-5-mobile">
+    <!-- style="font-weight:bolder; font-size: 1.4em; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"> -->
+    Examination Results Portal
+  </p>
+  <p class="has-text-centered mb-4 is-underlined is-bold" style="color: #000080;font-size: 1.5em; font-weight: bold;">{{
+    tableName }}
+  </p>
+  <div class="column is-5 is-9-mobile center my-6 p-6"  style="box-shadow: 2px 2px 7px grey; border-radius: 10px;">
+    <form action="{{ url_for('results') }}" class="form">
+      <input type="hidden" class="is-hidden" name="table" value="{{ table}}">
+      <div class="field">
+        <label for="roll" class="label">Roll No: </label>
+        <div class="control">
+          <input type="text" id="roll" maxlength="10" name="roll" class="input is-dark is-rounded" required>
+        </div>
+      </div>
+      <div class="pt-5 has-text-right">
+        <input type="submit" value="Search" class="button has-text-light color is-rounded">
+      </div>
+    </form>
+    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <article class="message mt-3 {{ category }}">
+      <div class="message-body has-text-centered">{{ message }}</div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,132 @@
+{% extends 'layout_dark.html' %}
+
+{% block title %}
+Admin Panel
+{% endblock title %}
+
+{% block navbarButton %}
+<div class="navbar-menu">
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <!-- TODO: change this url -->
+      <!-- <a href="/results/delete" class="button color has-text-light is-rounded mr-4">Delete</a> -->
+      <!-- <a href="/results/logout" class="button color has-text-light is-rounded">Logout</a> -->
+      <a href="/delete" class="button color has-text-light is-rounded mr-4">Delete</a>
+      <a href="/logout" class="button color has-text-light is-rounded">Logout</a>
+    </div>
+  </div>
+</div>
+{% endblock navbarButton %}
+
+{% block content %}
+<div class="container pt-5">
+  <div class="column is-5-desktop is-6-tablet is-9-mobile center">
+    <div class="card px-0 py-4">
+      <div class="card-content">
+
+        <!-- TODO: change this url -->
+        <form action="/upload" class="form" method="post" enctype="multipart/form-data">
+          <label class="label">Exam date:</label>
+          <div class="select mr-3">
+            <select name="examMonth" id="examMonth">
+              {% for examMonth in examMonths %}
+              <option value="{{ examMonth }}">{{ examMonth }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="select">
+            <select name="examYear" id="examYear">
+              {% for examYear in examYears %}
+              <option value="{{ examYear }}">{{ examYear }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <label for="course" class="label mt-2">Course:</label>
+          <div class="select">
+            <select name="course" id="course">
+              <option value="btech">B.Tech</option>
+              <option value="mtech">M.Tech</option>
+              <option value="mca">MCA</option>
+              <option value="mba">MBA</option>
+            </select>
+          </div>
+
+          <label for="year" class="label mt-2">Year:</label>
+          <div class="select">
+            <select name="year" id="year">
+              {% for year in years %}
+              <option value="{{ year }}">{{ year }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <label for="sem" class="label mt-2">Semester:</label>
+          <div class="select">
+            <select name="sem" id="sem">
+              {% for sem in sems %}
+              <option value="{{ sem }}">{{ sem }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <label for="regulation" class="label mt-2">Regulation:</label>
+          <input type="text" class="input column is-3" name="regulation">
+
+          <label class="label mt-2">Examination:</label>
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="regOrSup" value="regular" required>
+              Regular
+            </label>
+            <label class="radio">
+              <input type="radio" name="regOrSup" value="supplementary" required>
+              Supplementary
+            </label>
+            <label class="radio">
+              <input type="radio" name="regOrSup" value="both" required>
+              Both
+            </label>
+          </div>
+
+          <div id="file-js" class="file has-name mt-5 is-info">
+            <label class="file-label">
+              <input class="file-input" type="file" name="results" required>
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a CSV file…
+                </span>
+              </span>
+              <span class="file-name">
+                No file uploaded
+              </span>
+            </label>
+          </div>
+          {% for category, message in get_flashed_messages(with_categories=True) %}
+          <article class="message mt-3 {{ category }}">
+            <div class="message-body has-text-centered">{{ message }}</div>
+          </article>
+          {% endfor %}
+          <div class="has-text-right">
+            <input type="submit" class="mt-2 button is-info">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const fileInput = document.querySelector('#file-js input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-js .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>
+{% endblock content %}

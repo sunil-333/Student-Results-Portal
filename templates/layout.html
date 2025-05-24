@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    SVCE- {% block title %} {% endblock title %}
+  </title>
+  <link rel="stylesheet" href="/static/css/bulma.min.css" />
+  <link rel="icon" href="/static/images/favicon.png">
+  <style>
+    html,
+    body {
+      margin: 0 5px;
+      height: 100%;
+    }
+
+    body {
+      background-image: url('{{ bgImage }}');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .center {
+      margin: 0 auto;
+    }
+
+    .color {
+      background-color: #1E2944;
+    }
+
+    footer {
+      box-shadow: black;
+    }
+    
+    .printable-content-footer {
+        visibility: hidden;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      .printable * {
+        visibility: visible;
+      }
+      
+      .printable-content {
+          visibility: visible;
+          color: black;
+      }
+        
+      .printable-content-footer {
+          visibility: visible;
+          color: black;
+      }
+      
+      .printable {
+        position: absolute;
+        overflow: visible;
+        left: 0;
+        top: 0;
+        font-size: 0.8em;
+      }
+
+      @page {
+        margin: 0;
+      }
+
+      hr {
+        visibility: hidden;
+      }
+
+    }
+
+
+    .header-color th {
+      background-color: #fcc200;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar has-shadow">
+    <div class="navbar-brand">
+      <a href="{{ url_for('home') }} ">
+        <img src="/static/images/svcelogo.png" alt="logo" height="256" width="256"></a>
+    </div>
+    {% block navbarButton %} {% endblock navbarButton %}
+  </div>
+
+  <div class="container pt-1 px-0-mobile mx-0-mobile is-size-7-mobile">
+    {% block content %} {% endblock content %}
+  </div>
+  <footer class="py-4 is-size-7-mobile">
+    <div class="has-text-centered mb-3">
+      <p>
+        Results portal developed by <strong>V Lokesh</strong> and <strong>S Akhilesh</strong>
+      </p>
+      <p>With the help of <strong>K Bhanu Prakash</strong>, Assistant Professor, Department of CSE</p>
+      <p>
+        Powered by <strong>SVCE Exam Cell</strong>
+      </p>
+    </div>
+    <div class="has-text-centered py-1" style="background-color:#024980; color: white; font-weight:bold; height: 30px">@ SVCE - All Rights are Reserved</div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Admin Panel
+{% endblock title %}
+
+{% block navbarButton %}
+<div class="navbar-menu">
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <!-- TODO: change this url -->
+      <!-- <a href="/results/upload" class="button color has-text-white is-rounded mr-4">Upload</a> -->
+      <!-- <a href="/results/logout" class="button color has-text-white is-rounded">Logout</a> -->
+      <a href="/upload" class="button color has-text-white is-rounded mr-4">Upload</a>
+      <a href="/logout" class="button color has-text-white is-rounded">Logout</a>
+    </div>
+  </div>
+</div>
+{% endblock navbarButton %}
+
+{% block content %}
+<div class="container p-4-m-4">
+  {% for category, message in get_flashed_messages(with_categories=True) %}
+  <article class="message mt-3 {{ category }}">
+    <div class="message-body has-text-centered">{{ message }}</div>
+  </article>
+  {% endfor %}
+  <div class="table-container my-6 ">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Published date</th>
+          <th colspan="2">Results</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in resultsList %}
+        <tr>
+          <td>{{ row[1] }}</td>
+          <td><a href="{{ url_for('roll', table=row[0]) }}">{{ row[2] }}</a></td>
+          <td><a href="{{ url_for('delete', table=row[0]) }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <nav class="pagination" role="navigation" aria-label="pagination">
+    {% if prevUrl %}
+    <a href="{{ prevUrl }}" class="pagination-previous">Previous</a>
+    {% endif %}
+
+    {% if nextUrl %}
+    <a href="{{ nextUrl }}" class="pagination-next">Next page</a>
+    {% endif %}
+
+    <ul class="pagination-list">
+      {% for nav in navList %}
+      {% if nav %}
+      {% if nav==page %}
+      <li><a href="{{ url_for('home', page=nav) }}" class="pagination-link is-current"
+          aria-label="Goto page {{ nav }}">{{
+          nav }}</a>
+        {% else %}
+      <li><a href="{{ url_for('home', page=nav) }}" class="pagination-link" aria-label="Goto page {{ nav }}">{{ nav
+          }}</a>
+      </li>
+      {% endif %}
+      {% else %}
+      <li><span class="pagination-ellipsis">&hellip;</span></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+</div>
+{% endblock content %}

@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block navbarButton %}
+<div class="navbar-menu">
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <a href="{{ url_for('admin') }}" class="button color has-text-white is-rounded">Admin</a>
+    </div>
+  </div>
+</div>
+{% endblock navbarButton %}
+
+{% block content %}
+<div class="has-text-centered is-size-4 is-size-6-mobile" style="font-weight:bolder; color: #000080;">
+  <!-- <div class=" has-text-centered is-3" style="font-size:1.5em; font-weight: 900; font-family: CenturyGothic;"> -->
+  SRI VENKATESWARA COLLEGE OF ENGINEERING
+  <br>
+  (AUTONOMOUS)
+</div>
+<div class="has-text-centered is-size-6 is-size-7-mobile mb-2">
+  <!-- <div class="has-text-centered " style="font-size:1.1em; font-weight: 900; font-family: CenturyGothic;"> -->
+  <!--Approved by AICTE, Accredited by NAAC with 'A' Grade-->
+  <!--<br>-->
+  <!--Accredited by NBA (CSE, ECE, EEE, ME, CE & IT) & Permanently Affiliated to JNTUA.-->
+  <!--<br>-->
+  Karakambadi Road, Tirupati-517507, Andhra Pradesh, INDIA.
+  <!-- <hr> -->
+</div>
+<div class="content">
+  <p class="has-text-centered is-underlined is-size-4 is-size-5-mobile">
+    <!-- style="font-weight:bolder; font-size: 1.4em; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"> -->
+    Examination Results Portal
+  </p>
+
+  <div class="table-container my-6 ">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Published date</th>
+          <th>Results</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in resultsList %}
+        <tr>
+          <td>{{ row[1] }}</td>
+          <td><a href="{{ url_for('roll', table=row[0]) }}">{{ row[2] }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <nav class="pagination is-size-7-mobile" role="navigation" aria-label="pagination">
+    {% if prevUrl %}
+    <a href="{{ prevUrl }}" class="pagination-previous">Previous</a>
+    {% endif %}
+
+    {% if nextUrl %}
+    <a href="{{ nextUrl }}" class="pagination-next">Next page</a>
+    {% endif %}
+
+    <ul class="pagination-list">
+      {% for nav in navList %}
+      {% if nav %}
+      {% if nav==page %}
+      <li><a href="{{ url_for('home', page=nav) }}" class="pagination-link is-current"
+          aria-label="Goto page {{ nav }}">{{
+          nav }}</a>
+        {% else %}
+      <li><a href="{{ url_for('home', page=nav) }}" class="pagination-link" aria-label="Goto page {{ nav }}">{{ nav
+          }}</a>
+      </li>
+      {% endif %}
+      {% else %}
+      <li><span class="pagination-ellipsis">&hellip;</span></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+</div>
+{% endblock content %}

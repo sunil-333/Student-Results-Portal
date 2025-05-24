@@ -1,0 +1,109 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Results
+{% endblock title %}
+
+{% block content %}
+<div class="printable">
+    <div class="has-text-centered is-size-4 is-size-6-mobile" style="font-weight:bolder; color: #000080;">
+        <!-- <div class=" has-text-centered is-3" style="font-size:1.5em; font-weight: 900; font-family: CenturyGothic;"> -->
+        SRI VENKATESWARA COLLEGE OF ENGINEERING
+        <br>
+        (AUTONOMOUS)
+    </div>
+    <div class="has-text-centered is-size-6 is-size-7-mobile mb-2">
+        <!-- <div class="has-text-centered " style="font-size:1.1em; font-weight: 900; font-family: CenturyGothic;"> -->
+        <!--Approved by AICTE, Accredited by NAAC with 'A' Grade-->
+        <!--<br>-->
+        <!--Accredited by NBA (CSE, ECE, EEE, ME, CE & IT) & Permanently Affiliated to JNTUA.-->
+        <!--<br>-->
+        Karakambadi Road, Tirupati-517507, Andhra Pradesh, INDIA.
+        <!-- <hr> -->
+    </div>
+    <div class="content is-size-7-mobile">
+        <p class="has-text-centered is-underlined is-size-4 is-size-5-mobile">
+            <!-- style="font-weight:bolder; font-size: 1.4em; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"> -->
+            Examination Results Portal
+        </p>
+
+        <p class="has-text-centered mb-4 is-underlined is-bold" style="font-size: 1.5em; font-weight: bold;">
+            <a href="{{ url_for('roll', table=table) }}" style="color: #000080;">{{ examName }}</a>
+        </p>
+        <div class="table-container">
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ name }}</td>
+                </tr>
+                <tr>
+                    <th>Roll No</th>
+                    <td>{{ rollno }}</td>
+                </tr>
+                <tr>
+                    {% if branch %}
+                        <th>Branch</th>
+                        <td>{{ branch }}</td>
+                    {% else %}
+                        <th>Course</th>
+                        <td>{{ examName.split()[0] }}</td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+        <div class="table-container">
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                    <tr class="header-color">
+                        <th>S.No</th>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Internal</th>
+                        <th>External</th>
+                        <th>Total</th>
+                        <th>Pass/Fail</th>
+                        <th>Credits</th>
+                        <th>Grade</th>
+                        <th>Grade Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in marks[:-1] %}
+                    <tr>
+                        {% for col in row %}
+                        <td>{{ col }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                    <!--<tr>-->
+                    <!--    <th colspan="2">Max Marks</th>-->
+                    <!--    <td colspan="9">{{ marks[-1]['maxMarks']}}</td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <th colspan="2">Total Marks</th>
+                        <td colspan="9">{{ marks[-1]['totalMarks']}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Total Credits</th>
+                        <td colspan="9">{{ marks[-1]['totalCredits']}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">SGPA</th>
+                        <td colspan="9">{{ marks[-1]['sgpa']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="mt-6 mb-3 p-4 has-text-centered printable-content" style="border: 1px black solid;">
+    Note: Any discrepancy in the result noted above must be bought to the notice of the controller of Examinations(UG),
+    within
+    two weeks from the above date
+</div>
+<div class="has-text-centered printable-content-footer " style="background-color:#024980; color: black; font-weight:bold; ">@ SVCE - All Rights are Reserved</div>
+</div>
+
+<div class="level-right mr-6">
+    <button onclick="javascript:window.print()" class="button is-rounded color has-text-light">Print</button>
+</div>
+{% endblock content %}
